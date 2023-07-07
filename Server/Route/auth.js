@@ -8,6 +8,7 @@ const ProfileDetails = require("../src/Database/SchemaModel/profileDetailsSchema
 // Signup route
 router.post("/signup", async (req, res) => {
   try {
+    console.log('object')
     // Check if user already exists
     const existingUser = await User.findOne({ email: req.body.email });
     if (existingUser) {
