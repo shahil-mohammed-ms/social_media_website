@@ -1,0 +1,62 @@
+.left {
+  width: 20%;
+
+  height: 100vh;
+  position: fixed;
+}
+.top-logo {
+  padding-top: 50px;
+  height: 100px;
+  padding-left: 30px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.list {
+  padding: 24px;
+  padding-left: 18px;
+}
+.list-elements {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.list-elements:hover {
+  background-color: rgb(233, 221, 221);
+  border-radius: 10px;
+}
+
+.list-elements .top {
+  margin-top: 0;
+}
+.list-icons {
+  padding: 10px;
+}
+.list-icons ion-icon {
+  height: 28px;
+  width: 28px;
+}
+
+.list-titles .home {
+  font-weight: bold;
+}
+.IconNo {
+  color: red;
+  font-weight: bold;
+  font-size: small;
+  position: absolute;
+  margin-left: -5px;
+}
+.profile-img {
+  height: 30px;
+  width: 30px;
+  border-radius: 20px;
+}
+.list-elements {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-top: 10px;
+}

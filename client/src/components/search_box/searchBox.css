@@ -1,0 +1,32 @@
+.search_box {
+  padding-left: 350px;
+}
+
+.search_box .box {
+  width: 500px;
+  height: 100vh;
+  background-color: #050505;
+  color: white;
+}
+.search_box .box .top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.list-icons ion-icon {
+  height: 28px;
+  width: 28px;
+}
+.search_input {
+  height: 25px;
+  width: 300px;
+}
+.search_box .box .bottom {
+  padding-left: 50px;
+  padding-top: 20px;
+}
+.search_box .box .bottom .profile_box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

@@ -1,0 +1,108 @@
+.main-content {
+  background-color: black;
+  width: 500px;
+  min-height: 700px;
+  color: #fff;
+  margin-left: 30%;
+}
+
+.header {
+  height: 25px;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+.icons {
+  display: flex;
+  width: 100px;
+  justify-content: space-evenly;
+}
+
+ion-icon .one {
+}
+ion-icon {
+  height: 28px;
+  width: 28px;
+}
+
+.profile {
+  height: 150px;
+  margin-top: 10px;
+  display: flex;
+}
+
+.pro-pic {
+  padding: 5px;
+  padding-left: 20px;
+}
+.img {
+  height: 130px;
+  width: 130px;
+  border-radius: 100%;
+}
+.pro-numbers {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-left: 45px;
+}
+.display-number {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.profile-text {
+  font-size: small;
+}
+
+.profileDetails {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.profileDetails p {
+  text-align: justify;
+  line-height: 1.2;
+  padding-top: 5px;
+}
+
+.nick-name {
+  padding-left: 45px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.description {
+  margin-top: 5px;
+  font-size: small;
+}
+.phone-no {
+  margin-top: 6px;
+}
+
+.editProfile {
+  display: flex;
+  padding-top: 20px;
+  justify-content: space-evenly;
+}
+.pro-buttons {
+  height: 40px;
+  width: 150px;
+  border-radius: 50px;
+  font-size: large;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.postpictures {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  border-top: 2px solid white;
+  padding-bottom: 5px;
+}
+.postpictures img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}

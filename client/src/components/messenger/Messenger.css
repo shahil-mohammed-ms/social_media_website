@@ -1,0 +1,87 @@
+.main {
+  display: flex;
+  min-height: 100vh;
+}
+.conversation-box {
+  flex: 1;
+}
+.conversation-box .list-elements {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.conversation-box .list-elements:hover {
+  background-color: rgb(233, 221, 221);
+  border-radius: 10px;
+}
+
+.chat-box {
+  flex: 2.5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+.noConversationText {
+  position: absolute;
+  top: 10%;
+  font-size: 50px;
+  color: rgb(224, 220, 220);
+  cursor: default;
+}
+
+.chat-box .bottom {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  margin-bottom: 30px;
+  /* justify-content: space-between; */
+}
+.chatMessageInput {
+  width: 80%;
+  height: 90px;
+  padding: 10px;
+}
+
+.chatSubmitButton {
+  width: 70px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: teal;
+  color: white;
+  margin-left: 5px;
+}
+
+.chat-box .top {
+  height: 480px;
+  overflow-y: scroll;
+}
+
+.online-box {
+  flex: 1;
+}
+
+.online-box .list-elements {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.online-box .list-elements:hover {
+  background-color: rgb(233, 221, 221);
+  border-radius: 10px;
+}
+
+.top-logo {
+  cursor: pointer;
+}

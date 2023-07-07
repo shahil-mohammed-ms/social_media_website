@@ -1,0 +1,51 @@
+.main-container {
+  height: 100%;
+  width: 1200px;
+  color: aliceblue;
+}
+.post-container {
+  background-color: black;
+  width: 400px;
+  height: 500px;
+  padding-top: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.post-container .box {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  align-items: center;
+}
+.post-container .file-input {
+  width: 370px;
+  margin-top: 10px;
+}
+
+.post-container .img-box {
+  height: 74px;
+  width: 370px;
+}
+.post-container img {
+  height: 74px;
+  width: 74px;
+}
+
+.post-container .tandd {
+  height: 30px;
+  width: 370px;
+  margin-top: 10px;
+}
+
+.post-container button {
+  width: 200px;
+  height: 30px;
+  margin-left: 90px;
+  margin-top: 10px;
+  font-size: large;
+  font-weight: 600;
+}
+.post-container .input {
+  padding: 5px;
+  font-size: 15px;
+}
