@@ -6,6 +6,7 @@ import axios from '../../../axios'
 import Slider from "react-slick";
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from "react-cookie";
+import Comment from '../../comment/comment';
 
 // Define the initial state for post likes
 const initialState = {
@@ -37,7 +38,8 @@ function Post() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [user_id,setUser_id] = useState('')
   const [likedPosts, dispatch] = useReducer(reducer, initialState);
-
+  const [commentBox,setCommentBox] = useState(false)
+  const [postData,setPostData] =useState()
   
 
   useEffect(() => {
@@ -103,10 +105,15 @@ function Post() {
     dispatch({ type: 'REMOVE_POSTID', postId });
 
   }
+  const toggleCommentBox = () => {
+    setCommentBox((prevValue) => !prevValue);
+  };
 
  
+ 
   return (
-    <div>
+    <div className='testMainBox'>
+{commentBox &&<Comment onClose={toggleCommentBox}  post_details={postData} settings={settings} />}
       {
         profile.map((post)=>{
           return(
@@ -181,7 +188,7 @@ function Post() {
               )}
           
 
-         <span className="post-icon-footer"><ion-icon name="chatbubbles-outline"></ion-icon></span>
+         <span className="post-icon-footer" onClick={()=>{toggleCommentBox();setPostData(post);}}><ion-icon name="chatbubbles-outline"></ion-icon></span>
          <span className="post-icon-footer "><ion-icon name="exit-outline"></ion-icon></span>
          <span className="post-icon-footer last"><ion-icon name="bookmark-outline"></ion-icon></span> 
         

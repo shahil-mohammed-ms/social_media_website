@@ -111,3 +111,156 @@
 }
 .heart-not-like {
 }
+
+.testMainBox{
+/* position: relative; */
+
+}
+.comment_exit{
+
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.comment_box{
+  height: 90vh;
+  width: 540px;
+  background-color: rgb(255, 255, 255);
+  position: relative;
+ left:89px;
+ top: 40px;
+ position: sticky;
+ z-index: 1;
+ /* overflow-y: scroll; */
+padding: 15px;
+padding-top: 30px;
+
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.profile_section {
+ display: flex;
+ align-items: center;
+ gap: 5px;
+}
+.profile_section p{
+  font-size: smaller;
+  
+  
+}
+.post-pro-pic img{
+  height: 25px !important;
+  width: 25px !important;
+  border-radius: 20px;
+  
+}
+.post_section{
+background-color: #fff;
+height: 250px;
+padding-top: 10px;
+padding-left: 20px;
+
+
+}
+
+.post_img_section  img{
+  width: 170px;
+  height: 200px;
+
+}
+.post_sub{
+  display: flex;
+  
+}
+.post_desc_title{
+  padding: 20px;
+  padding-top: 5px;
+}
+
+.post_desc_section p{
+margin-top: 10px;
+
+}
+.post_title_section{
+  word-break: break-word;
+}
+.post_title_section h3{
+  margin-top: 5px;
+}
+.post_title_section p{
+  margin-top: 10px;
+  font-size: small;
+
+}
+
+
+
+
+
+.comment_section{
+/* background-color: blueviolet; */
+overflow-y: scroll;
+height: 220px;
+}
+.comment_header{
+  display: flex;
+  align-items: center;
+ gap: 5px;
+ padding-left: 5px;
+ padding-top: 8px;
+}
+.commenter_name{
+  display: inline;
+}
+.comment_sub{
+  display: flex;
+  padding-left: 5px;
+ gap: 10px;
+ 
+}
+.comment_sub .time_cmt{
+  font-size: smaller;
+  margin-top: 5px;
+}
+.comment_sub .write_cmt{
+  font-size: small;
+  
+}
+.comment_input{
+  width: 400px;
+  border: none;
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  height: 30px;
+  padding: 5px;
+}
+
+.comment_submit{
+
+height: 40px;
+display: flex;
+padding: 5px;
+align-items: center;
+justify-content: space-between;
+margin-right: 10px;
+
+
+
+}
+.comment_submit_btn{
+  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-right: 10px;
+}
+
+
+
+
+.post-pro-pic img{
+  height: 25px !important;
+  width: 25px !important;
+  border-radius: 20px;
+  
+  
+}

@@ -44,6 +44,7 @@ function Messenger() {
     });
   }, []);
 
+  // getting all the conversation of user 
   useEffect(() => {
     const getConversation = async () => {
       const userId = profile.UID;
@@ -54,7 +55,7 @@ function Messenger() {
 
     getConversation();
   }, []);
-
+//get messages using currentchat id
   useEffect(() => {
     const getMessages = async () => {
       try {
@@ -74,6 +75,7 @@ function Messenger() {
       text: newMessage,
       conversationId: currentChat._id,
     };
+ 
     const receiverId = currentChat.members.find(
       (member) => member !== profile.UID
     );
@@ -87,11 +89,14 @@ function Messenger() {
     try {
       const res = await axios.post(`/message`, message);
       setMessages([...messages, res.data]);
+      
       setNewMessage("");
     } catch (err) {
       console.log(err);
     }
   };
+
+
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollIntoView({ behavior: "smooth" });

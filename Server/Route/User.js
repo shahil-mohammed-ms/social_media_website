@@ -6,7 +6,7 @@ const ProfileDetails = require("../src/Database/SchemaModel/profileDetailsSchema
 const Post = require("../src/Database/SchemaModel/postSchema");
 const User = require("../src/Database/SchemaModel/signupSchema");
 
-//Home
+//Home//
 
 router.get("/", async (req, res) => {
   try {

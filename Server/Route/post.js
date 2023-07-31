@@ -210,11 +210,17 @@ router.post("/:postId/unlike", async (req, res) => {
   }
 });
 
-//for post comments
+//for post comments                                                                          post comment
 router.post("/:postId/comments", async (req, res) => {
+  console.log('object')
+  console.log(req.body.comment)
+  console.log(req.params.postId)
+  
+  
+
   try {
-    const userId = new mongoose.Types.ObjectId("643d0319cbbd28aaf742706e");
-    const { commentText } = req.body;
+    const userId = req.session.user.id;
+    const commentText  = req.body.comment;
     const postId = req.params.postId;
 
     // Create a new comment
@@ -238,12 +244,12 @@ router.post("/:postId/comments", async (req, res) => {
   }
 });
 
-// GET route to fetch comments for a specific post
+// GET route to fetch comments for a specific post                                             get comment
 router.get("/:postId/comments", async (req, res) => {
   try {
     const postId = req.params.postId;
 
-    //  const postIdMongoose=new mongoose.Types.ObjectId(postId)
+    
     // Find the post by postId
     const post = await Post.findById(postId);
 
@@ -259,10 +265,34 @@ router.get("/:postId/comments", async (req, res) => {
     // Find comments by commentIds
     const comments = await Comment.find({ _id: { $in: commentIds } });
 
-    // Extract commentText from comments
-    const commentTexts = comments.map((comment) => comment);
+    
 
-    res.status(200).json({ success: true, comments: commentTexts });
+    const commentWithDetails = await Promise.all(
+// Extract commentText from comments
+comments.map(async(cmnt)=>{
+const user = await ProfileDetails.findOne({UID:cmnt.userId})
+
+return {
+  
+  id:cmnt.id,
+  commentText:cmnt.commentText,
+  likes:cmnt.likes,
+  likesCount:cmnt.likesCount,
+  createdAt:cmnt.createdAt,
+  commentedBy: {
+    nickName: user.nickName,
+    profileUrl: user.profileUrl,
+    userId: user.UID,
+  },
+
+
+}
+
+})
+      
+    )
+
+    res.status(200).json({ success: true,commentWithDetails });
   } catch (err) {
     res
       .status(500)
@@ -270,7 +300,7 @@ router.get("/:postId/comments", async (req, res) => {
   }
 });
 
-// Like a comment
+// Like a comment                                                                         like comment
 router.post("/:postId/comments/:commentId/like", async (req, res) => {
   try {
     const userId = new mongoose.Types.ObjectId("64346e5c0721bbc69f274e24");
