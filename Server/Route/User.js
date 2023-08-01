@@ -41,7 +41,7 @@ router.get("/", async (req, res) => {
       })
     );
 
-    res.json(postsWithUserDetails);
+    res.json({postsWithUserDetails,prof:profile});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });

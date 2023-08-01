@@ -231,16 +231,16 @@ router.post("/:postId/comments", async (req, res) => {
     });
 
     // Save the comment to the database
-    await comment.save();
+    const resp =  await comment.save();
 
     // Update the post's comments array with the new comment's ID
-    await Post.findByIdAndUpdate(postId, { $push: { comments: comment._id } });
+   await Post.findByIdAndUpdate(postId, { $push: { comments: comment._id } });
 
     res
       .status(200)
-      .json({ success: true, message: "Comment added successfully" });
+      .json({ success: true, message: "Comment added successfully",resp:resp });
   } catch (err) {
-    res.status(500).json({ success: false, message: "Failed to add comment" });
+    res.status(500).json({ success: false, message: "Failed to add comment", });
   }
 });
 

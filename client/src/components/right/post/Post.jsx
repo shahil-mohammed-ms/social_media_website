@@ -40,6 +40,7 @@ function Post() {
   const [likedPosts, dispatch] = useReducer(reducer, initialState);
   const [commentBox,setCommentBox] = useState(false)
   const [postData,setPostData] =useState()
+  const [passProData,setPassProData] = useState()
   
 
   useEffect(() => {
@@ -47,7 +48,9 @@ function Post() {
       try {
         //this api gives posts
         const profileResponse = await axios.get('/', { withCredentials: true });
-        setProfile(profileResponse.data)
+        setProfile(profileResponse.data.postsWithUserDetails )
+        setPassProData(profileResponse.data.prof)
+        console.log(profileResponse)
         const users_session = await axios.get('/profile', { withCredentials: true });
         setUser_id(users_session.data.user.id)
 
@@ -113,7 +116,7 @@ function Post() {
  
   return (
     <div className='testMainBox'>
-{commentBox &&<Comment onClose={toggleCommentBox}  post_details={postData} settings={settings} />}
+{commentBox &&<Comment onClose={toggleCommentBox} prof={passProData}  post_details={postData} settings={settings} />}
       {
         profile.map((post)=>{
           return(

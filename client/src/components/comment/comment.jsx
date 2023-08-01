@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import Slider from "react-slick";
 import axios from '../../axios'
 
-function Comment({ onClose,post_details }) {
+function Comment({ onClose,post_details,prof }) {
   const [comment, setComment] = useState('');
   const[retrievedComments,setRetrievedComments] = useState([])
 
@@ -11,8 +11,25 @@ function Comment({ onClose,post_details }) {
   e.preventDefault()
   try{
     const postComment =await axios.post(`post/${post_details.id}/comments`,{comment,withCredentials: true})
-    // setRetrievedComments((prev)=>[...prev,comment])
-    // setComment('')
+    console.log('comnt axios reply post')
+    console.log(prof+'hii')
+    console.log(prof)
+    console.log(postComment.data)
+    
+    
+    setRetrievedComments((prev)=>[...prev,{id:postComment.data.resp.id,
+      likes:postComment.data.resp.likes,
+      likesCount:postComment.data.resp.likesCount,
+      commentText:postComment.data.resp.commentText,
+      createdAt:postComment.data.resp.createdAt,
+      commentedBy:{
+        nickName:prof.nickName,
+        profileUrl:prof.profileUrl
+
+      }
+
+    }])
+    setComment('')
     
   }catch(e){
   console.log(e)
