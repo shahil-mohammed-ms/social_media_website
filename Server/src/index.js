@@ -2,8 +2,10 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const MongoDBSessionStore = require("connect-mongodb-session")(session);
 require("../src/Database/Mongoose/mongoose");
 const cors = require("cors");
+
 
 const app = express();
 app.use(
@@ -11,7 +13,13 @@ app.use(
     origin: process.env.CORS_ORIGIN,
     credentials: true,
   })
-); // enable cors for all routes
+); // enable cors for all routes  
+// Set up the MongoDB session store
+const sessionStore = new MongoDBSessionStore({
+  uri: process.env.MONGODB_URI, // Your MongoDB connection URI
+  collection: "sessions", // The name of the collection where session data will be stored
+});
+
 app.use(
   session({
     name: "sessionId",
@@ -19,6 +27,7 @@ app.use(
     resave: true,
     saveUninitialized: true,
     cookie: { maxAge: 3600000 },
+    store: sessionStore, // Use the MongoDB session store
   })
 );
 // app.use(session({ secret: "key", cookie: { maxAge: 3600000 } }));
