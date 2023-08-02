@@ -10,6 +10,12 @@ const User = require("../src/Database/SchemaModel/signupSchema");
 
 router.get("/", async (req, res) => {
   try {
+
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 3;
+    const totalPosts = await Post.countDocuments();
+    const totalPages = Math.ceil(totalPosts / limit);
+
     const sessionid = req.session.user.id;
 
     const profile = await ProfileDetails.findOne({ UID: sessionid });
@@ -19,7 +25,8 @@ router.get("/", async (req, res) => {
 
     const posts = await Post.find({ userId: { $in: followingIds } })
       .sort({ createdAt: -1 }) // Sort by descending createdAt
-      .exec();
+      .skip((page - 1) * limit)
+      .limit(limit);;
     const postsWithUserDetails = await Promise.all(
       posts.map(async (post) => {
         const user = await ProfileDetails.findOne({ UID: post.userId });
@@ -40,8 +47,9 @@ router.get("/", async (req, res) => {
         };
       })
     );
+    console.log(postsWithUserDetails.length)
 
-    res.json({postsWithUserDetails,prof:profile});
+    res.json({postsWithUserDetails:postsWithUserDetails,prof:profile,totalPages:totalPages});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });

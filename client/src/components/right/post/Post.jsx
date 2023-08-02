@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from 'react';
+import React, { useEffect, useState, useReducer,useCallback,useRef } from 'react';
 import '../post/Post.css'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -41,27 +41,75 @@ function Post() {
   const [commentBox,setCommentBox] = useState(false)
   const [postData,setPostData] =useState()
   const [passProData,setPassProData] = useState()
+
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   
+
+  // useEffect(() => {
+   
+  //   fetchData();
+  // }, [page]);
+  // useEffect(() => {
+  //   let isMounted = true;
+  
+  //   if (isMounted) {
+  //     fetchData();
+  //   }
+  
+  //   return () => {
+  //     isMounted = false;
+  //   };
+  // }, [page]);
+  const isMountedRef = useRef(false); // Ref to track mounting
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        //this api gives posts
-        const profileResponse = await axios.get('/', { withCredentials: true });
-        setProfile(profileResponse.data.postsWithUserDetails )
-        setPassProData(profileResponse.data.prof)
-        console.log(profileResponse)
+    if (isMountedRef.current) {
+      fetchData();
+    } else {
+      isMountedRef.current = true;
+    }
+  }, [page]);
+
+  
+
+
+  const fetchData = async () => {
+    try {
+
+      //this api gives posts
+      const profileResponse = await axios.get(`/?page=${page}&limit=5`, { withCredentials: true });   //                    all posts
+      const {postsWithUserDetails :newPosts,totalPages:newTotalPages} = profileResponse.data
+      console.log("page:", page);
+console.log("totalPages:", totalPages);
+      setProfile((existingPosts) => [...existingPosts, ...newPosts]);
+      setTotalPages(newTotalPages);
+      setPassProData(profileResponse.data.prof)
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  
+  const handleSeeMore = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
+
+
+  useEffect(()=>{
+    const getData = async() =>{
+      try{
         const users_session = await axios.get('/profile', { withCredentials: true });
         setUser_id(users_session.data.user.id)
-
-
-      } catch (error) {
-        console.log(error);
+      }catch(e){
+        console.log(e)
       }
-    };
-  
-    fetchData();
-  }, []);
+
+    }
+    getData()
+
+  },[])
 
   const settings = {
     dots: true,
@@ -208,6 +256,7 @@ function Post() {
         })
 
      }
+    {page < totalPages && <button onClick={handleSeeMore}>See More</button>}
     </div>
    
   )
