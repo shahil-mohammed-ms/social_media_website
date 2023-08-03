@@ -34,7 +34,7 @@ function Post() {
   // Access the session ID cookie
   const sessionId = cookies["sessionId"];
 
-  const [profile, setProfile] = useState([]);
+  const [profile, setProfile] = useState([]);   // array of post are retrieved here
   const [currentSlide, setCurrentSlide] = useState(0);
   const [user_id,setUser_id] = useState('')
   const [likedPosts, dispatch] = useReducer(reducer, initialState);
@@ -79,12 +79,11 @@ function Post() {
 
       //this api gives posts
       const profileResponse = await axios.get(`/?page=${page}&limit=5`, { withCredentials: true });   //                    all posts
-      const {postsWithUserDetails :newPosts,totalPages:newTotalPages} = profileResponse.data
-      console.log("page:", page);
-console.log("totalPages:", totalPages);
-      setProfile((existingPosts) => [...existingPosts, ...newPosts]);
+      const {postsWithUserDetails ,totalPages:newTotalPages,prof} = profileResponse.data
+    
+      setProfile((existingPosts) => [...existingPosts, ...postsWithUserDetails]);
       setTotalPages(newTotalPages);
-      setPassProData(profileResponse.data.prof)
+      setPassProData(prof)
       
     } catch (error) {
       console.log(error);
@@ -124,14 +123,26 @@ console.log("totalPages:", totalPages);
 // liking a post
   const handleLike = async(postId) => {
   const likePost = await axios.post(`/post/${postId}/like`)
-
+  setProfile((prevPosts) =>
+  prevPosts.map((post) =>
+    post.id === postId
+      ? { ...post, likesCount: post.likesCount + 1 }
+      : post
+  )
+);
   };
 
   //unliking a post
   const handleUnLike =async (postId) => {
     
     const likePost = await axios.post(`/post/${postId}/unlike`)
-  
+    setProfile((prevPosts) =>
+      prevPosts.map((post) =>
+        post.id === postId
+          ? { ...post, likesCount: Math.max(post.likesCount - 1, 0) }
+          : post
+      )
+    );
   };
 
   const isPostLiked = (postlikeArray) => {
@@ -163,8 +174,10 @@ console.log("totalPages:", totalPages);
  
  
   return (
+
+
     <div className='testMainBox'>
-{commentBox &&<Comment onClose={toggleCommentBox} prof={passProData}  post_details={postData} settings={settings} />}
+{commentBox &&<Comment onClose={toggleCommentBox} prof={passProData}  post_details={postData} settings={settings}  />}
       {
         profile.map((post)=>{
           return(
@@ -214,6 +227,7 @@ console.log("totalPages:", totalPages);
 {isIncludedArray(post.id)?(<ion-icon name={`heart-outLine`}
     onClick={() => {
       handleLike(post.id);
+
       removeArr(post.id)
     }} 
   ></ion-icon>):(<ion-icon name={`heart`}

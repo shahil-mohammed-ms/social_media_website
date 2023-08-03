@@ -5,16 +5,13 @@ import axios from '../../axios'
 function Comment({ onClose,post_details,prof }) {
   const [comment, setComment] = useState('');
   const[retrievedComments,setRetrievedComments] = useState([])
-
+ 
 
  const postData = async(e)=>{
   e.preventDefault()
   try{
     const postComment =await axios.post(`post/${post_details.id}/comments`,{comment,withCredentials: true})
-    console.log('comnt axios reply post')
-    console.log(prof+'hii')
-    console.log(prof)
-    console.log(postComment.data)
+   
     
     
     setRetrievedComments((prev)=>[...prev,{id:postComment.data.resp.id,
@@ -40,8 +37,6 @@ function Comment({ onClose,post_details,prof }) {
 const fetchData =async()=>{
 const getComentData = await axios.get(`post/${post_details.id}/comments`)
 setRetrievedComments(getComentData.data.commentWithDetails)
-console.log('this is what u are looking for')
-console.log(getComentData.data.commentWithDetails) 
 
 }
 fetchData()

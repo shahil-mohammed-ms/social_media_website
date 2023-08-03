@@ -10,6 +10,7 @@ const User = require("../src/Database/SchemaModel/signupSchema");
 
 router.get("/", async (req, res) => {
   try {
+  
 
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 3;
@@ -47,9 +48,9 @@ router.get("/", async (req, res) => {
         };
       })
     );
-    console.log(postsWithUserDetails.length)
+    
 
-    res.json({postsWithUserDetails:postsWithUserDetails,prof:profile,totalPages:totalPages});
+    res.json({postsWithUserDetails,prof:profile,totalPages});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
