@@ -48,11 +48,13 @@ function Profile() {
               navigate("/home");
             }}
           ></ion-icon>
-          <ion-icon
+
+        { profile.UID == profileInfo.UID && <ion-icon
             className="one"
             onClick={() => navigate("/createPost")}
             name="duplicate-outline"
-          ></ion-icon>
+          ></ion-icon>}
+
           <ion-icon className="two" name="menu-outline"></ion-icon>
         </div>
       </div>
