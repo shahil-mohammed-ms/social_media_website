@@ -21,6 +21,7 @@ function Profile() {
       try {
         const profileDetails = await axios.get(`/profilePage/${userId}`);
         setProfileInfo(profileDetails.data);
+        
         const postsDetails = await axios.get(`/post/postPage/${userId}`);
 
         setPost(postsDetails.data);
@@ -68,7 +69,7 @@ function Profile() {
         <div className="pro-numbers">
           <div className="display-number">
             <div className="no">
-              <h2>20</h2>
+              <h2>{post.length}</h2>
             </div>
             <div className="pname profile-text">
               <p>Posts</p>
@@ -77,7 +78,7 @@ function Profile() {
 
           <div className="display-number">
             <div className="no">
-              <h2>10</h2>
+              <h2>{profileInfo.followersCount}</h2>
             </div>
             <div className="pname profile-text">
               <p>followers</p>
@@ -86,7 +87,7 @@ function Profile() {
 
           <div className="display-number">
             <div className="no">
-              <h2>10</h2>
+              <h2>{profileInfo.followingCount}</h2>
             </div>
             <div className="pname profile-text">
               <p>following</p>

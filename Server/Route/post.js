@@ -212,11 +212,6 @@ router.post("/:postId/unlike", async (req, res) => {
 
 //for post comments                                                                          post comment
 router.post("/:postId/comments", async (req, res) => {
-  console.log('object')
-  console.log(req.body.comment)
-  console.log(req.params.postId)
-  
-  
 
   try {
     const userId = req.session.user.id;
