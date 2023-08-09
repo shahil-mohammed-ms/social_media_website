@@ -83,4 +83,16 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+router.post('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying session:', err);
+      return res.status(500).json({ message: 'Logout failed' });
+    }
+    res.clearCookie('sessionId'); // Clear the session cookie
+    res.status(200).json({ message: 'Logged out successfully' });
+  });
+});
+
 module.exports = router;
